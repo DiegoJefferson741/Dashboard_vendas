@@ -1,0 +1,102 @@
+Utilizar a plataforma PythonAnywhere 
+https://www.pythonanywhere.com/
+
+
+1 - Verificar se o app funciona no Spyder 
+    Abrir o app no Spyder 
+    Rodar o app e copiar a url gerada (http://127.0.0.1:8050/) pelo app no navegador web 
+
+
+7 - Criar requirements.txt 
+    pip freeze > requirements.txt (rodar esse comando no anaconda prompt dentro da pasta do projeto) 
+
+  - Criar arquivo .gitignore 
+    Dentro do arquivo colocar o nome do ambiente virtual python (dash-venv) 
+    que será ignorado ao subir o projeto para o github  
+
+8 - Criar repositorio no github 
+    api_dashboard 
+
+    Copiar os arquivos do dashobard que criamos 
+       assets (pasta)
+       .gitignore (arquivo que contem o que será ignorado ao clonar o git 
+       Dashobard_vendas.py  (arquivo do dashboard) 
+       requirements.txt  (sera criado com o comando python freeze > requirements.txt)
+       sales_data_samples.csv (arquivo .csv com os dados para serem consumidos) 
+
+
+9 - Associar o repositorio do github com o pythonanywhere 
+
+ No pythonanywhere fazer o clone da pagina do github 
+    - Menu: consoles 
+    - Other: Bash 
+    execultar o comando: git clone https://github.com/gustavowillam/api_dashboard.git
+
+10 - Criar o ambiente virtual python 3.9 (dash-env) no menu Bash 
+     comando: mkvirtualenv dash-env --python=/usr/bin/python3.9
+
+     No Basch console ir para a pasta da api_dashbord para instalar o requirements 
+     comandos: ls (listar arquivos da pasta local)
+               cd api_dashboard
+               pip install -r requirements.txt 
+
+
+12 - Criar uma nova aplicação dentro do pythonanywhere e linkar ela com o github 
+     Menu: Web -> Add a new app -> Next -> Flask -> Python 3.9 -> Next 
+
+
+No menu Web ir em Code -> Source Code -> trocar o nome <mysite> para o nome do repositorio -> api_dashboard 
+/home/gustavowillam/api_dashboard 
+
+Clicar em Save 
+
+13 - No virtualenv escrever o nome do ambiente virtual criado no PythonAnyWhere 
+     dash-env 
+
+ 
+14 - Ir em WSGI configuration file: (arquivo de configuração) e trocar: 
+
+     mysite -> pelo nome do repositorio: api_dashboard 
+   
+     trocar a linha: from flask_app import app as application  # noqa
+
+     Colocar: 
+
+     from Dashboard_vendas import app
+     application = app.server
+
+     Clicar em Save apos fazer as alterações 
+
+
+15 - Ir no menu Web e regarregar o app  (Reload gustavowillam.pythonanywhere.com) 
+
+	Clicar no link da aplicação que está acima do botão de regarregar: 
+      Configuration for gustavowillam.pythonanywhere.com
+
+	A aplicação irá abrir e se nao houver erro, ela vai rodar 
+
+      Se ocorrer erro, ir no arquivo de log para ver o erro que está dando 
+
+      Ocorreu erro de carregar o arquivo .csv 
+
+      Ir no github, pegar o link do arquivo csv e substituir pelo nome do arquivo no 
+      codigo fonte do programa: Dashobard_vendas.py  (arquivo que já está no pythonanywhere) 
+      https://raw.githubusercontent.com/gustavowillam/api_dashboard/main/sales_data_sample.csv
+
+
+16 -  Deletar ambiente virtual no PythonAnyWhere 
+
+      - rm -rf /home/gustavowillam/.virtualenvs/dash-env
+
+17 -  Ativar ambiente virtual no PythonAnyWhere 
+
+      - workon dash-env    
+       
+
+	
+
+
+
+
+
+
